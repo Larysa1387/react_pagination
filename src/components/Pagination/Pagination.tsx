@@ -2,7 +2,7 @@ import cls from 'classnames';
 import { getNumbers } from '../../utils';
 
 interface PaginationProps {
-  total: string[];
+  total: number;
   perPage: number;
   currentPage: number;
   onPageChange: (page: number) => void;
@@ -14,7 +14,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   onPageChange,
 }) => {
-  const totalPages = Math.ceil(42 / perPage);
+  const totalPages = Math.ceil(total / perPage);
   const paginationArray = getNumbers(1, totalPages);
 
   return (
@@ -72,15 +72,6 @@ export const Pagination: React.FC<PaginationProps> = ({
             »
           </a>
         </li>
-      </ul>
-      <ul>
-        {total.map((item, index) => {
-          return (
-            <li key={index} data-cy="item">
-              {item}
-            </li>
-          );
-        })}
       </ul>
     </>
   );

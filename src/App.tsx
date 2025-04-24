@@ -13,7 +13,7 @@ export const App: React.FC = () => {
   const itemStartOnNextPage = currentPage * itemsPerPage - itemsPerPage + 1;
   const lastItemOnPage = Math.min(items.length, currentPage * itemsPerPage);
 
-  const visibleItems = items.slice(itemStartOnNextPage - 1, lastItemOnPage);
+  const visibleItems = getNumbers(itemStartOnNextPage, lastItemOnPage);
 
   const onPageChange = (page: number) => {
     setCurrentPage(page);
@@ -57,11 +57,21 @@ export const App: React.FC = () => {
       </div>
 
       <Pagination
-        total={visibleItems}
+        total={items.length}
         perPage={itemsPerPage}
         currentPage={currentPage}
         onPageChange={onPageChange}
       />
+
+      <ul>
+        {visibleItems.map((item, index) => {
+          return (
+            <li key={index} data-cy="item">
+              Item {item}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
